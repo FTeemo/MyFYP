@@ -25,6 +25,8 @@ from dataset import Dataset
 from metrics import iou_score
 from utils import AverageMeter, str2bool
 
+import albumentations as A
+
 ARCH_NAMES = archs.__all__
 LOSS_NAMES = losses.__all__
 LOSS_NAMES.append('BCEWithLogitsLoss')
@@ -58,9 +60,9 @@ def parse_args():
                         help='input channels')
     parser.add_argument('--num_classes', default=1, type=int,
                         help='number of classes')
-    parser.add_argument('--input_w', default=96, type=int,
+    parser.add_argument('--input_w', default=256, type=int,
                         help='image width')
-    parser.add_argument('--input_h', default=96, type=int,
+    parser.add_argument('--input_h', default=256, type=int,
                         help='image height')
     
     # loss
@@ -261,19 +263,19 @@ def main():
     train_img_ids, val_img_ids = train_test_split(img_ids, test_size=0.2, random_state=41)
     #数据增强：
     train_transform = Compose([
-        transforms.RandomRotate90(),
+        A.RandomRotate90(),
         transforms.Flip(),
         OneOf([
             transforms.HueSaturationValue(),
             transforms.RandomBrightness(),
             transforms.RandomContrast(),
         ], p=1),#按照归一化的概率选择执行哪一个
-        transforms.Resize(config['input_h'], config['input_w']),
+        A.Resize(config['input_h'], config['input_w']),
         transforms.Normalize(),
     ])
 
     val_transform = Compose([
-        transforms.Resize(config['input_h'], config['input_w']),
+        A.Resize(config['input_h'], config['input_w']),
         transforms.Normalize(),
     ])
 
