@@ -73,7 +73,7 @@ def parse_args():
                         ' (default: BCEDiceLoss)')
     
     # dataset
-    parser.add_argument('--dataset', default='brain',
+    parser.add_argument('--dataset', default='/brain',
                         help='dataset name')
     parser.add_argument('--img_ext', default='.jpg',
                         help='image file extension')
