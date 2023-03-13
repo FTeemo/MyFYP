@@ -73,7 +73,7 @@ def parse_args():
                         ' (default: BCEDiceLoss)')
     
     # dataset
-    parser.add_argument('--dataset', default='/brain',
+    parser.add_argument('--dataset', default='./inputs/brain',
                         help='dataset name')
     parser.add_argument('--img_ext', default='.jpg',
                         help='image file extension')
@@ -255,11 +255,11 @@ def main():
         scheduler = None
     else:
         raise NotImplementedError
-
+    
+    config['dataset'] = 'brain'
     # Data loading code
     img_ids = glob(os.path.join('inputs', config['dataset'], 'images', '*' + config['img_ext']))
     img_ids = [os.path.splitext(os.path.basename(p))[0] for p in img_ids]
-
     train_img_ids, val_img_ids = train_test_split(img_ids, test_size=0.2, random_state=41)
     #数据增强：
     train_transform = Compose([
