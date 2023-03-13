@@ -16,6 +16,8 @@ import archs
 from dataset import Dataset
 from metrics import iou_score
 from utils import AverageMeter
+
+import albumentations as A
 """
 需要指定参数：--name dsb2018_96_NestedUNet_woDS
 """
@@ -23,7 +25,7 @@ from utils import AverageMeter
 def parse_args():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--name', default="dsb2018_96_NestedUNet_woDS",
+    parser.add_argument('--name', default="brain_NestedUNet_woDS",
                         help='model name')
 
     args = parser.parse_args()
@@ -54,16 +56,16 @@ def main():
 
     # Data loading code
     img_ids = glob(os.path.join('inputs', config['dataset'], 'images', '*' + config['img_ext']))
-    img_ids = [os.path.splitext(os.path.basename(p))[0] for p in img_ids]
+    #img_ids = [os.path.splitext(os.path.basename(p))[0] for p in img_ids]
 
-    _, val_img_ids = train_test_split(img_ids, test_size=0.2, random_state=41)
+    #_, val_img_ids = train_test_split(img_ids, test_size=0.2, random_state=41)
 
     model.load_state_dict(torch.load('models/%s/model.pth' %
                                      config['name']))
     model.eval()
 
     val_transform = Compose([
-        transforms.Resize(config['input_h'], config['input_w']),
+        A.Resize(config['input_h'], config['input_w']),
         transforms.Normalize(),
     ])
 

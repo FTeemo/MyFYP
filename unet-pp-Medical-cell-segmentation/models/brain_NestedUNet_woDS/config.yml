@@ -1,6 +1,6 @@
 arch: NestedUNet
 batch_size: 8
-dataset: /brain
+dataset: ./inputs/brain
 deep_supervision: false
 early_stopping: -1
 epochs: 100
@@ -16,7 +16,7 @@ mask_ext: .png
 milestones: 1,2
 min_lr: 1.0e-05
 momentum: 0.9
-name: /brain_NestedUNet_woDS
+name: ./inputs/brain_NestedUNet_woDS
 nesterov: false
 num_classes: 1
 num_workers: 0
