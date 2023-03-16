@@ -55,11 +55,11 @@ class Dataset(torch.utils.data.Dataset):
     def __getitem__(self, idx):
         img_id = self.img_ids[idx]
         
-        img = cv2.imread(os.path.join(self.img_dir, img_id + self.img_ext))
-
+        img = cv2.imread(os.path.join(self.img_dir[7:], img_id + self.img_ext))
+        #print(self.img_dir[6:])
         mask = []
         for i in range(self.num_classes):
-            mask.append(cv2.imread(os.path.join(self.mask_dir, str(i),
+            mask.append(cv2.imread(os.path.join(self.mask_dir[7:], str(i),
                         img_id + self.mask_ext), cv2.IMREAD_GRAYSCALE)[..., None])
         #数组沿深度方向进行拼接。
         mask = np.dstack(mask)
