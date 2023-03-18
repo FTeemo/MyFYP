@@ -1,9 +1,9 @@
 arch: NestedUNet
-batch_size: 8
+batch_size: 16
 dataset: ./inputs/brain
 deep_supervision: false
 early_stopping: -1
-epochs: 100
+epochs: 500
 factor: 0.1
 gamma: 0.6666666666666666
 img_ext: .jpg

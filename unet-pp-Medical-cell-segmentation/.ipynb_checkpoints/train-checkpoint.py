@@ -44,9 +44,9 @@ def parse_args():
 
     parser.add_argument('--name', default=None,
                         help='model name: (default: arch+timestamp)')
-    parser.add_argument('--epochs', default=100, type=int, metavar='N',
+    parser.add_argument('--epochs', default=500, type=int, metavar='N',
                         help='number of total epochs to run')
-    parser.add_argument('-b', '--batch_size', default=8, type=int,
+    parser.add_argument('-b', '--batch_size', default=16, type=int,
                         metavar='N', help='mini-batch size (default: 16)')
     
     # model
@@ -256,9 +256,10 @@ def main():
     else:
         raise NotImplementedError
     
-    config['dataset'] = 'brain'
+    #config['dataset'] = 'brain'
+    print(os.path.join(config['dataset'], 'images', '*' + config['img_ext']))
     # Data loading code
-    img_ids = glob(os.path.join('inputs', config['dataset'], 'images', '*' + config['img_ext']))
+    img_ids = glob(os.path.join(config['dataset'], 'images', '*' + config['img_ext']))
     img_ids = [os.path.splitext(os.path.basename(p))[0] for p in img_ids]
     train_img_ids, val_img_ids = train_test_split(img_ids, test_size=0.2, random_state=41)
     #数据增强：
