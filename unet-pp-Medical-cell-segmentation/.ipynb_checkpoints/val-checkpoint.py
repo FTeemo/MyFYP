@@ -25,7 +25,7 @@ import albumentations as A
 def parse_args():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--name', default="brain_NestedUNet_woDS",
+    parser.add_argument('--name', default="brain1,100,8",
                         help='model name')
 
     args = parser.parse_args()
@@ -39,6 +39,7 @@ def main():
     with open('models/%s/config.yml' % args.name, 'r') as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
 
+    print(args.name)
     print('-'*20)
     for key in config.keys():
         print('%s: %s' % (key, str(config[key])))
@@ -55,10 +56,10 @@ def main():
     model = model.cuda()
 
     # Data loading code
-    img_ids = glob(os.path.join('inputs', config['dataset'], 'images', '*' + config['img_ext']))
-    #img_ids = [os.path.splitext(os.path.basename(p))[0] for p in img_ids]
-
-    #_, val_img_ids = train_test_split(img_ids, test_size=0.2, random_state=41)
+    #img_ids = glob(os.path.join('inputs', config['dataset'], 'images', '*' + config['img_ext']))
+    img_ids = glob(os.path.join(config['dataset'], 'images', '*' + config['img_ext']))
+    img_ids = [os.path.splitext(os.path.basename(p))[0] for p in img_ids]
+    _, val_img_ids = train_test_split(img_ids, test_size=0.2, random_state=41)
 
     model.load_state_dict(torch.load('models/%s/model.pth' %
                                      config['name']))

@@ -1,5 +1,5 @@
 arch: NestedUNet
-batch_size: 16
+batch_size: 1
 dataset: ./inputs/test
 deep_supervision: false
 early_stopping: -1

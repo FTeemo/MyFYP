@@ -25,7 +25,7 @@ import albumentations as A
 def parse_args():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--name', default="brain_NestedUNet_woDS",
+    parser.add_argument('--name', default="brain1,100,8",
                         help='model name')
 
     args = parser.parse_args()
