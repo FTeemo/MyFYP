@@ -46,11 +46,11 @@ def parse_args():
                         help='model name: (default: arch+timestamp)')
     parser.add_argument('--epochs', default=100, type=int, metavar='N',
                         help='number of total epochs to run')
-    parser.add_argument('-b', '--batch_size', default=8, type=int,
+    parser.add_argument('-b', '--batch_size', default=40, type=int,
                         metavar='N', help='mini-batch size (default: 16)')
     
     # model
-    parser.add_argument('--arch', '-a', metavar='ARCH', default='UNet',
+    parser.add_argument('--arch', '-a', metavar='ARCH', default='NestedUNet',
                         choices=ARCH_NAMES,
                         help='model architecture: ' +
                         ' | '.join(ARCH_NAMES) +
@@ -229,7 +229,7 @@ def main():
     print("=> creating model %s" % config['arch'])
     model = archs.__dict__[config['arch']](config['num_classes'],
                                            config['input_channels'],
-                                           #config['deep_supervision']
+                                           config['deep_supervision']
                                           )
 
     model = model.cuda()

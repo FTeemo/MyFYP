@@ -25,7 +25,7 @@ import albumentations as A
 def parse_args():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--name', default="14,100",
+    parser.add_argument('--name', default="14,300",
                         help='model name')
 
     args = parser.parse_args()

@@ -1,6 +1,6 @@
 arch: NestedUNet
-batch_size: 2
-dataset: ./inputs/test
+batch_size: 14
+dataset: ./inputs/brain
 deep_supervision: false
 early_stopping: -1
 epochs: 300

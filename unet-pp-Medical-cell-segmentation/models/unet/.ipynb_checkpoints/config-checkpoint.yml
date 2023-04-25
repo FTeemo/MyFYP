@@ -1,6 +1,6 @@
 arch: UNet
-batch_size: 1
-dataset: ./inputs/test
+batch_size: 8
+dataset: ./inputs/brain
 deep_supervision: false
 early_stopping: -1
 epochs: 100
