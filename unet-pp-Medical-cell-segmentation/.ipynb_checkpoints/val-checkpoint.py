@@ -25,7 +25,7 @@ import albumentations as A
 def parse_args():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--name', default="brain1,100,8",
+    parser.add_argument('--name', default="14,100",
                         help='model name')
 
     args = parser.parse_args()
@@ -51,12 +51,14 @@ def main():
     print("=> creating model %s" % config['arch'])
     model = archs.__dict__[config['arch']](config['num_classes'],
                                            config['input_channels'],
-                                           config['deep_supervision'])
+                                           config['deep_supervision']
+                                          )
 
     model = model.cuda()
 
     # Data loading code
     #img_ids = glob(os.path.join('inputs', config['dataset'], 'images', '*' + config['img_ext']))
+
     img_ids = glob(os.path.join(config['dataset'], 'images', '*' + config['img_ext']))
     img_ids = [os.path.splitext(os.path.basename(p))[0] for p in img_ids]
     _, val_img_ids = train_test_split(img_ids, test_size=0.2, random_state=41)
